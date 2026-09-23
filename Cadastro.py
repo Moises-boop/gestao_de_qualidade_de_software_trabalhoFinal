@@ -37,8 +37,12 @@ def exibir_menu():
     print("6 - Sair")
     return ler_inteiro("Escolha uma opcao: ")
 
+
 def cadastrar_pessoa(nomes, idades, emails):
-    """Lê nome, idade e e-mail de uma nova pessoa e os adiciona às listas."""
+    """Lê nome, idade e e-mail de uma nova pessoa e os adiciona ao fim das listas.
+
+    Ao final, informa a situação da pessoa (maior ou menor de idade).
+    """
     nome = input("Informe o nome: ")
     idade = ler_inteiro("Informe a idade: ")
     email = input("Informe o email: ")
@@ -47,6 +51,7 @@ def cadastrar_pessoa(nomes, idades, emails):
     emails.append(email)
     print("Situacao: " + situacao(idade))
 
+
 def exibir_pessoa(nomes, idades, emails, pos):
     """Exibe os dados e a situação da pessoa cadastrada na posição informada."""
     print("Nome: " + nomes[pos])
@@ -54,14 +59,14 @@ def exibir_pessoa(nomes, idades, emails, pos):
     print("E-mail: " + emails[pos])
     print("Situacao: " + situacao(idades[pos]))
 
+
 def buscar_pessoa(nomes, nome_procurado):
     """Retorna a posição de nome_procurado na lista de nomes, ou -1 se não existir."""
-    pos = 0
-    while pos < len(nomes):
-        if nomes[pos] == nome_procurado:
+    for pos, nome in enumerate(nomes):
+        if nome == nome_procurado:
             return pos
-        pos = pos + 1
     return -1
+
 
 def consultar_pessoa(nomes, idades, emails):
     """Solicita um nome e exibe os dados da pessoa correspondente, se cadastrada."""
@@ -72,76 +77,74 @@ def consultar_pessoa(nomes, idades, emails):
     else:
         exibir_pessoa(nomes, idades, emails, pos)
 
+
 def alterar_pessoa(nomes, idades, emails):
     """Solicita um nome e substitui todos os dados da pessoa correspondente."""
     procurado = input("Nome para alterar: ")
     pos = buscar_pessoa(nomes, procurado)
     if pos == -1:
         print("Nao encontrado")
-    else:
-        nomes[pos] = input("Novo nome: ")
-        idades[pos] = ler_inteiro("Nova idade: ")
-        emails[pos] = input("Novo e-mail: ")
-        print("Pessoa alterada!")
-        exibir_pessoa(nomes, idades, emails, pos)
+        return
+    nomes[pos] = input("Novo nome: ")
+    idades[pos] = ler_inteiro("Nova idade: ")
+    emails[pos] = input("Novo e-mail: ")
+    print("Pessoa alterada!")
+    exibir_pessoa(nomes, idades, emails, pos)
+
 
 def listar_pessoas(nomes, idades, emails):
     """Exibe todas as pessoas cadastradas e o total de cadastros."""
-    if len(nomes) == 0:
+    if not nomes:
         print("Nenhuma pessoa cadastrada")
-    pos = 0
-    while pos < len(nomes):
+    for pos in range(len(nomes)):
         exibir_pessoa(nomes, idades, emails, pos)
         print("-------------------------")
-        pos = pos + 1
     print("Total: " + str(len(nomes)))
 
 
 def analisar_faixa_etaria(idade):
-    """Exibe a faixa etária correspondente à idade."""
+    """Retorna a faixa etária correspondente à idade."""
     if idade < 12:
-        print("Faixa etaria: crianca")
-    elif idade < MAIORIDADE:
-        print("Faixa etaria: adolescente")
-    elif idade < 60:
-        print("Faixa etaria: adulto")
-    else:
-        print("Faixa etaria: idoso")
+        return "crianca"
+    if idade < MAIORIDADE:
+        return "adolescente"
+    if idade < 60:
+        return "adulto"
+    return "idoso"
 
-def analisar_contato(idade, email):
-    """Exibe a situação do contato considerando a idade e o e-mail."""
-    if idade >= MAIORIDADE and "@" in email:
-        print("Contato: completo")
-    elif idade >= MAIORIDADE:
-        print("Contato: e-mail invalido")
-    else:
-        print("Contato: menor de idade")
 
 def analisar_email(email):
-    """Exibe o provedor do e-mail, ou indica que o e-mail é inválido."""
+    """Retorna o provedor do e-mail, ou indica que o e-mail é inválido."""
     if "@" not in email:
-        print("E-mail invalido")
-    elif email.endswith("@gmail.com"):
-        print("Provedor: Gmail")
-    elif email.endswith("@outlook.com"):
-        print("Provedor: Outlook")
-    else:
-        print("Provedor: outro")
+        return "e-mail invalido"
+    if email.endswith("@gmail.com"):
+        return "Gmail"
+    if email.endswith("@outlook.com"):
+        return "Outlook"
+    return "outro"
+
+
+def analisar_contato(idade, email):
+    """Retorna a situação do contato considerando a idade e a validade do e-mail."""
+    if idade < MAIORIDADE:
+        return "menor de idade"
+    if "@" not in email:
+        return "e-mail invalido"
+    return "completo"
+
 
 def analisar_pessoa(nomes, idades, emails):
-    """Solicita um nome e exibe a análise de faixa etária, e-mail e contato."""
+    """Solicita um nome e exibe a análise de faixa etária, e-mail e contato da pessoa."""
     procurado = input("Nome para analisar: ")
     pos = buscar_pessoa(nomes, procurado)
-
     if pos == -1:
         print("Pessoa nao encontrada")
-    else:
-        idade = idades[pos]
-        email = emails[pos]
-
-        analisar_faixa_etaria(idade)
-        analisar_email(email)
-        analisar_contato(idade, email)
+        return
+    idade = idades[pos]
+    email = emails[pos]
+    print("Faixa etaria: " + analisar_faixa_etaria(idade))
+    print("Provedor: " + analisar_email(email))
+    print("Contato: " + analisar_contato(idade, email))
 
 
 def main():

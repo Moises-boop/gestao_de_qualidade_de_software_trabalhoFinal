@@ -33,7 +33,7 @@ def exibir_menu():
     print("2 - Consultar pessoa")
     print("3 - Alterar pessoa")
     print("4 - Listar pessoas")
-    print("5 - Avalisar cadastro")
+    print("5 - Analisar cadastro")
     print("6 - Sair")
     return ler_inteiro("Escolha uma opcao: ")
 
@@ -96,6 +96,7 @@ def listar_pessoas(nomes, idades, emails):
     """Exibe todas as pessoas cadastradas e o total de cadastros."""
     if not nomes:
         print("Nenhuma pessoa cadastrada")
+        return
     for pos in range(len(nomes)):
         exibir_pessoa(nomes, idades, emails, pos)
         print("-------------------------")

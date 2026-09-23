@@ -129,28 +129,32 @@ def analisar_pessoa(nomes, idades, emails):
         analisar_email(email)
         analisar_contato(idade, email)
 
-nomes = []
-idades = []
-emails = []
 
-op = 0
+def main():
+    """Executa o laço principal do programa até o usuário escolher sair."""
+    nomes = []
+    idades = []
+    emails = []
+    acoes = {
+        1: cadastrar_pessoa,
+        2: consultar_pessoa,
+        3: alterar_pessoa,
+        4: listar_pessoas,
+        5: analisar_pessoa,
+    }
 
-while op != 6:
-    op = exibir_menu()
+    opcao = 0
+    while opcao != 6:
+        opcao = exibir_menu()
+        if opcao in acoes:
+            acoes[opcao](nomes, idades, emails)
+        elif opcao == 6:
+            print("Saindo...")
+        else:
+            print("Opcao invalida")
 
-    if op == 1:
-        cadastrar_pessoa(nomes, idades, emails)
-    elif op == 2:
-        consultar_pessoa(nomes, idades, emails)
-    elif op == 3:
-        alterar_pessoa(nomes, idades, emails)
-    elif op == 4:
-        listar_pessoas(nomes, idades, emails)
-    elif op == 5:
-        analisar_pessoa(nomes, idades, emails)
-    elif op == 6:
-        print("Saindo...")
-    else:
-        print("Opcao invalida")
+    print("Fim do programa")
 
-print("Fim do programa")
+
+if __name__ == "__main__":
+    main()

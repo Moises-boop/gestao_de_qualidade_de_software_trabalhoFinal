@@ -4,6 +4,26 @@ Artefato didático que serve de suporte para a disciplina de Gestão de
 Qualidade de Software, curso de Ciência da Computação - UTFPR campus Medianeira.
 """
 
+MAIORIDADE = 18
+OPCAO_SAIR = 6
+
+
+def ler_inteiro(mensagem):
+    """Solicita um número inteiro ao usuário, repetindo até receber um valor válido."""
+    while True:
+        try:
+            return int(input(mensagem))
+        except ValueError:
+            print("Valor invalido, informe um numero inteiro.")
+
+
+def situacao(idade):
+    """Retorna a situação da pessoa (maior ou menor de idade) de acordo com a idade."""
+    if idade >= MAIORIDADE:
+        return "Maior de idade"
+    return "Menor de idade"
+
+
 def exibir_menu():
     """Exibe o menu de opções e retorna a opção escolhida pelo usuário."""
     print("=========================")
@@ -15,30 +35,24 @@ def exibir_menu():
     print("4 - Listar pessoas")
     print("5 - Avalisar cadastro")
     print("6 - Sair")
-    return int(input("Escolha uma opcao: "))
+    return ler_inteiro("Escolha uma opcao: ")
 
 def cadastrar_pessoa(nomes, idades, emails):
     """Lê nome, idade e e-mail de uma nova pessoa e os adiciona às listas."""
     nome = input("Informe o nome: ")
-    nomes.append(nome)
-    idade = int(input("Informe a idade: "))
-    idades.append(idade)
+    idade = ler_inteiro("Informe a idade: ")
     email = input("Informe o email: ")
+    nomes.append(nome)
+    idades.append(idade)
     emails.append(email)
-    if idade >= 18:
-        print("Situacao: Maior de idade")
-    else:
-        print("Situacao: Menor de idade")
+    print("Situacao: " + situacao(idade))
 
 def exibir_pessoa(nomes, idades, emails, pos):
     """Exibe os dados e a situação da pessoa cadastrada na posição informada."""
     print("Nome: " + nomes[pos])
     print("Idade: " + str(idades[pos]))
     print("E-mail: " + emails[pos])
-    if idades[pos] >= 18:
-        print("Situacao: Maior de idade")
-    else:
-        print("Situacao: Menor de idade")
+    print("Situacao: " + situacao(idades[pos]))
 
 def buscar_pessoa(nomes, nome_procurado):
     """Retorna a posição de nome_procurado na lista de nomes, ou -1 se não existir."""
@@ -66,7 +80,7 @@ def alterar_pessoa(nomes, idades, emails):
         print("Nao encontrado")
     else:
         nomes[pos] = input("Novo nome: ")
-        idades[pos] = int(input("Nova idade: "))
+        idades[pos] = ler_inteiro("Nova idade: ")
         emails[pos] = input("Novo e-mail: ")
         print("Pessoa alterada!")
         exibir_pessoa(nomes, idades, emails, pos)
@@ -87,7 +101,7 @@ def analisar_faixa_etaria(idade):
     """Exibe a faixa etária correspondente à idade."""
     if idade < 12:
         print("Faixa etaria: crianca")
-    elif idade < 18:
+    elif idade < MAIORIDADE:
         print("Faixa etaria: adolescente")
     elif idade < 60:
         print("Faixa etaria: adulto")
@@ -96,9 +110,9 @@ def analisar_faixa_etaria(idade):
 
 def analisar_contato(idade, email):
     """Exibe a situação do contato considerando a idade e o e-mail."""
-    if idade >= 18 and "@" in email:
+    if idade >= MAIORIDADE and "@" in email:
         print("Contato: completo")
-    elif idade >= 18:
+    elif idade >= MAIORIDADE:
         print("Contato: e-mail invalido")
     else:
         print("Contato: menor de idade")
@@ -144,11 +158,11 @@ def main():
     }
 
     opcao = 0
-    while opcao != 6:
+    while opcao != OPCAO_SAIR:
         opcao = exibir_menu()
         if opcao in acoes:
             acoes[opcao](nomes, idades, emails)
-        elif opcao == 6:
+        elif opcao == OPCAO_SAIR:
             print("Saindo...")
         else:
             print("Opcao invalida")

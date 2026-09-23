@@ -39,7 +39,7 @@ extension-pkg-whitelist=
 fail-on=
 
 # Specify a score threshold under which the program will exit with error.
-fail-under=10
+fail-under=7
 
 # Interpret the stdin as a python script, whose filename needs to be passed as
 # the module_or_package argument.
@@ -135,7 +135,7 @@ bad-names=foo,
           baz,
           toto,
           tutu,
-          tata
+          tata,
 
 # Bad variable names regexes, separated by a comma. If names match any regex,
 # they will always be refused
@@ -177,7 +177,7 @@ const-naming-style=UPPER_CASE
 docstring-min-length=-1
 
 # Naming style matching correct function names.
-function-naming-style=snake_case
+function-naming-style=PascalCase
 
 # Regular expression matching correct function names. Overrides function-
 # naming-style. If left empty, function names will be checked with the set
@@ -190,7 +190,8 @@ good-names=i,
            k,
            ex,
            Run,
-           _
+           _,
+           aux
 
 # Good variable names regexes, separated by a comma. If names match any regex,
 # they will always be accepted

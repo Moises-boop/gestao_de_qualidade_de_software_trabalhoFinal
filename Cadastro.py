@@ -16,7 +16,7 @@ def exibir_menu():
     print("5 - Avalisar cadastro")
     print("6 - Sair")
     return int(input("Escolha uma opcao: "))
- 
+
 def cadastrar_pessoa(nomes, idades, emails):
     """Lê nome, idade e e-mail de uma nova pessoa e os adiciona às listas."""
     nome = input("Informe o nome: ")
@@ -39,7 +39,7 @@ def exibir_pessoa(nomes, idades, emails, pos):
         print("Situacao: Maior de idade")
     else:
         print("Situacao: Menor de idade")
- 
+
 def buscar_pessoa(nomes, nome_procurado):
     """Retorna a posição de nome_procurado na lista de nomes, ou -1 se não existir."""
     pos = 0
@@ -132,38 +132,25 @@ def analisar_pessoa(nomes, idades, emails):
 nomes = []
 idades = []
 emails = []
- 
-qtd = 0
-op = 0
- 
-while op != 6:
-    #print("=========================")
-    #print(" CADASTRO DE PESSOAS")
-    #print("=========================")
-    #print("1 - Cadastrar pessoa")
-    #print("2 - Consultar pessoa")
-    #print("3 - Alterar pessoa")
-    #print("4 - Listar pessoas")
-    #print("4 - Listar pessoas")
-    #print("5 - Sair")
-    #op = int(input("Escolha uma opcao: "))
 
+op = 0
+
+while op != 6:
     op = exibir_menu()
- 
+
     if op == 1:
         cadastrar_pessoa(nomes, idades, emails)
     elif op == 2:
         consultar_pessoa(nomes, idades, emails)
-  
     elif op == 3:
-        alterar_pessoa(nomes, idades, emails)            
+        alterar_pessoa(nomes, idades, emails)
     elif op == 4:
         listar_pessoas(nomes, idades, emails)
     elif op == 5:
         analisar_pessoa(nomes, idades, emails)
     elif op == 6:
-        print("Saindo...") 
+        print("Saindo...")
     else:
         print("Opcao invalida")
- 
+
 print("Fim do programa")

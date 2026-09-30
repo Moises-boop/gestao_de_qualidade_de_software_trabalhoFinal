@@ -6,5 +6,5 @@
 4. **docstrings** devem estar presentes nas funções.
 5. Constantes em MAÍUSCULO.
 6. Classes em *PascalCase*.
-7. Métodos e atributos em *snake_case*.
+7. Métodos e atributos em *camelCase*.
 

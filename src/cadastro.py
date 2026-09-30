@@ -7,7 +7,6 @@ Qualidade de Software, curso de Ciência da Computação - UTFPR campus Medianei
 MAIORIDADE = 18
 OPCAO_SAIR = 6
 
-
 def LerInteiro(mensagem):
     """Solicita um número inteiro ao usuário, repetindo até receber um valor válido."""
     while True:

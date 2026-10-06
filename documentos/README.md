@@ -15,8 +15,18 @@ Utilizar um mesmo projeto para aplicar, progressivamente, conceitos e práticas 
 - Git
 - GitHub
 
+## Estrutura
+
+- `documentos/`: README, guia de contribuição (`CONTRIBUTING.md`) e checklist de inspeção.
+- `src/pessoa.py`: classe `Pessoa`, com os dados de uma pessoa.
+- `src/cadastro.py`: serviços (casos de uso) do cadastro, como cadastrar, buscar, listar, alterar e analisar pessoas.
+- `src/main.py`: interface em console com o usuário (menu, leitura e exibição dos dados).
+
 ## Execução
 
-Execute o programa pelo terminal:
+Execute o programa pelo terminal, a partir da raiz do projeto:
 
-python cadastro.py
+```bash
+cd src
+python main.py
+```

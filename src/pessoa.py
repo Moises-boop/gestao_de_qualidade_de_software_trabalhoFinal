@@ -1,11 +1,13 @@
+"""Entidade Pessoa do cadastro de pessoas."""
+
 class Pessoa:
     """Definição da classe pessoa"""
     def __init__(self, nome, idade, email):
         """Define o contrato da classe"""
         self.__nome = nome
-        self.__idade = idade 
+        self.__idade = idade
         self.__email = email
-    
+
     def getNome(self):
         """Retorna o nome da pessoa"""
         return self.__nome
@@ -13,7 +15,7 @@ class Pessoa:
     def getIdade(self):
         """Retorna a idade da pessoa"""
         return self.__idade
-    
+
     def getEmail(self):
         """Retorna o email da pessoa"""
         return self.__email

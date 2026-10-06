@@ -8,7 +8,9 @@ Qualidade de Software, curso de Ciência da Computação - UTFPR campus Medianei
 
 from pessoa import Pessoa
 
+IDADE_ADOLESCENTE = 12
 MAIORIDADE = 18
+IDADE_IDOSO = 60
 
 class CadastroPessoa:
     """Gerencia o conjunto de pessoas cadastradas"""
@@ -58,11 +60,11 @@ class CadastroPessoa:
     def analisarFaixaEtaria(self, pessoa):
         """Retorna a faixa etária correspondente à idade da pessoa."""
         idade = pessoa.getIdade()
-        if idade < 12:
+        if idade < IDADE_ADOLESCENTE:
             return "crianca"
         if idade < MAIORIDADE:
             return "adolescente"
-        if idade < 60:
+        if idade < IDADE_IDOSO:
             return "adulto"
         return "idoso"
 

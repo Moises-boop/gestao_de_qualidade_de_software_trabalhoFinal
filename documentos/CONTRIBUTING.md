@@ -2,7 +2,7 @@
 
 ## Nomenclatura e estilo
 
-1. Nomes de variáveis no formato *snake_case*.
+1. Nomes de variáveis e de argumentos no formato *snake_case*.
 2. Nomes de funções em *PascalCase*.
 3. Linhas de no máximo 100 caracteres.
 4. **docstrings** devem estar presentes nos módulos, classes, funções e métodos.
@@ -10,10 +10,11 @@
 6. Classes em *PascalCase*.
 7. Métodos em *camelCase*.
 8. Atributos em *snake_case*.
+9. Nomes de módulos (arquivos `.py`) em *snake_case*.
 
 ## Organização do código
 
-O código fica na pasta `src` e é dividido em camadas:
+O código fica na pasta `src`, a documentação na pasta `documentos`, e o código é dividido em camadas:
 
 - `pessoa.py`: classe `Pessoa`, que guarda os dados de uma pessoa (atributos privados, acessados por *getters* e *setters*).
 - `cadastro.py`: classe `CadastroPessoa`, com os serviços (casos de uso) do sistema, como cadastrar, buscar, listar, alterar e analisar pessoas.
@@ -26,6 +27,8 @@ Regras:
 - Regras de negócio (como a idade de maioridade) devem ficar em constantes em `cadastro.py`, e não repetidas no código.
 
 ## Ambiente de desenvolvimento
+
+Execute os comandos a partir da raiz do projeto.
 
 1. Crie e ative o ambiente virtual:
 
@@ -47,6 +50,8 @@ Regras:
    ```
 
 ## Antes de commitar
+
+Os comandos abaixo devem ser executados a partir da raiz do projeto.
 
 1. Execute o Pylint e corrija todos os avisos. As regras do projeto estão no `.pylintrc`:
 

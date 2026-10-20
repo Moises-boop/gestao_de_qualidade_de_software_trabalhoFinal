@@ -14,7 +14,7 @@
 
 ## Organização do código
 
-O código fica na pasta `src`, a documentação na pasta `documentos`, e o código é dividido em camadas:
+O código fica na pasta `src`, os testes na pasta `tests`, a documentação na pasta `documentos`, e o código é dividido em camadas:
 
 - `pessoa.py`: classe `Pessoa`, que guarda os dados de uma pessoa (atributos privados, acessados por *getters* e *setters*).
 - `cadastro.py`: classe `CadastroPessoa`, com os serviços (casos de uso) do sistema, como cadastrar, buscar, listar, alterar e analisar pessoas.
@@ -40,10 +40,10 @@ Execute os comandos a partir da raiz do projeto.
 2. Instale as ferramentas de qualidade:
 
    ```bash
-   pip install pylint pre-commit
+   pip install pylint pytest pre-commit
    ```
 
-3. Instale o hook do pre-commit, que roda o Pylint antes de cada commit:
+3. Instale o hook do pre-commit, que roda o Pylint e o PyTest antes de cada commit:
 
    ```bash
    pre-commit install
@@ -59,14 +59,26 @@ Os comandos abaixo devem ser executados a partir da raiz do projeto.
    pylint src/*.py
    ```
 
-2. Execute o programa e teste as opções do menu afetadas pela alteração:
+2. Execute os testes automatizados. A configuração fica no `pytest.ini`:
+
+   ```bash
+   pytest
+   ```
+
+3. Execute o programa e teste as opções do menu afetadas pela alteração:
 
    ```bash
    cd src
    python main.py
    ```
 
-Commits que não passam no Pylint são bloqueados pelo pre-commit. Mantenha o ambiente virtual ativado ao commitar, para que o hook encontre o Pylint.
+Commits que não passam no Pylint ou nos testes são bloqueados pelo pre-commit. Mantenha o ambiente virtual ativado ao commitar, para que o hook encontre o Pylint e o PyTest.
+
+## Testes
+
+- Os testes ficam em `tests/`, em arquivos `test_*.py`.
+- Testes são métodos em *camelCase* começando por `test` (ex.: `testBuscarPorNomeInexistente`), agrupados em classes em *PascalCase* começando por `Test`.
+- Todo novo caso de uso em `CadastroPessoa` deve vir acompanhado de testes.
 
 ## Branches e commits
 
@@ -77,5 +89,6 @@ Commits que não passam no Pylint são bloqueados pelo pre-commit. Mantenha o am
   - `fix`: correção de erro.
   - `refactor`: mudança no código que não altera o comportamento.
   - `style`: formatação, espaços e nomenclatura.
+  - `test`: criação ou alteração de testes.
   - `docs`: documentação e docstrings.
   - `chore`: configuração e ferramentas.

@@ -12,6 +12,7 @@ Utilizar um mesmo projeto para aplicar, progressivamente, conceitos e práticas 
 ## Tecnologias
 
 - Python
+- PyTest
 - Git
 - GitHub
 
@@ -21,6 +22,8 @@ Utilizar um mesmo projeto para aplicar, progressivamente, conceitos e práticas 
 - `src/pessoa.py`: classe `Pessoa`, com os dados de uma pessoa.
 - `src/cadastro.py`: serviços (casos de uso) do cadastro, como cadastrar, buscar, listar, alterar e analisar pessoas.
 - `src/main.py`: interface em console com o usuário (menu, leitura e exibição dos dados).
+- `tests/test_cadastro.py`: testes automatizados dos serviços do cadastro.
+- `pytest.ini`: configuração do PyTest.
 
 ## Execução
 
@@ -29,4 +32,12 @@ Execute o programa pelo terminal, a partir da raiz do projeto:
 ```bash
 cd src
 python main.py
+```
+
+## Testes
+
+Com o ambiente virtual ativado, execute a partir da raiz do projeto:
+
+```bash
+pytest
 ```

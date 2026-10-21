@@ -7,3 +7,9 @@ repos:
       entry: python3 -m pylint
       language: system
       types: [python]
+    - id: pytest
+      name: pytest
+      entry: python3 -m pytest
+      language: system
+      pass_filenames: false
+      always_run: true

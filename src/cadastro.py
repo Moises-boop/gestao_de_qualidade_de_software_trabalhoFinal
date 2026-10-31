@@ -6,40 +6,37 @@ Artefato didático que serve de suporte para a disciplina de Gestão de
 Qualidade de Software, curso de Ciência da Computação - UTFPR campus Medianeira.
 """
 
+from typing import List, Optional
+
 from pessoa import Pessoa
+from repositorio_pessoas import RepositorioPessoas
+from repositorio_pessoas_memoria import RepositorioPessoasMemoria
 
 IDADE_ADOLESCENTE = 12
 MAIORIDADE = 18
 IDADE_IDOSO = 60
 
 class CadastroPessoa:
-    """Gerencia o conjunto de pessoas cadastradas"""
+    """Gerencia o conjunto de pessoas cadastradas."""
 
-    def __init__(self):
-        self.__pessoas = []
+    def __init__(self, repositorio: Optional[RepositorioPessoas] = None) -> None:
+        if repositorio is None:
+            repositorio = RepositorioPessoasMemoria()
+
+        self.__repositorio = repositorio
 
     def cadastrar(self, nome, idade, email):
-        """Cria uma pessoa com os dados informados e a adiciona ao cadastro."""
         pessoa = Pessoa(nome, idade, email)
-        self.__pessoas.append(pessoa)
+        self.__repositorio.cadastrar(pessoa)
         return pessoa
 
     def buscarPorNome(self, nome):
-        """Retorna a pessoa com o nome informado, ou None se não estiver cadastrada."""
-        for pessoa in self.__pessoas:
-            if pessoa.getNome() == nome:
-                return pessoa
-        return None
+        return self.__repositorio.buscar(nome)
 
-    def listar(self):
-        """Retorna a lista de pessoas cadastradas."""
-        return self.__pessoas
+    def listar(self) -> List[Pessoa]:
+        return self.__repositorio.listar()
 
     def alterar(self, nome, novo_nome, nova_idade, novo_email):
-        """Substitui os dados da pessoa com o nome informado.
-
-        Retorna a pessoa alterada, ou None se não estiver cadastrada.
-        """
         pessoa = self.buscarPorNome(nome)
 
         if pessoa is None:
@@ -52,7 +49,7 @@ class CadastroPessoa:
         return pessoa
 
     def situacao(self, pessoa):
-        """Retorna a situação da pessoa (maior ou menor de idade) de acordo com a idade."""
+        """Retorna a situação da pessoa de acordo com a idade."""
         if pessoa.getIdade() >= MAIORIDADE:
             return "Maior de idade"
         return "Menor de idade"
@@ -60,6 +57,7 @@ class CadastroPessoa:
     def analisarFaixaEtaria(self, pessoa):
         """Retorna a faixa etária correspondente à idade da pessoa."""
         idade = pessoa.getIdade()
+
         if idade < IDADE_ADOLESCENTE:
             return "crianca"
         if idade < MAIORIDADE:
@@ -69,8 +67,9 @@ class CadastroPessoa:
         return "idoso"
 
     def analisarEmail(self, pessoa):
-        """Retorna o provedor do e-mail da pessoa, ou indica que o e-mail é inválido."""
+        """Retorna o provedor do e-mail ou indica se é inválido."""
         email = pessoa.getEmail()
+
         if "@" not in email:
             return "e-mail invalido"
         if email.endswith("@gmail.com"):
@@ -80,9 +79,10 @@ class CadastroPessoa:
         return "outro"
 
     def analisarContato(self, pessoa):
-        """Retorna a situação do contato considerando a idade e a validade do e-mail."""
+        """Retorna a situação do contato considerando idade e e-mail."""
         if pessoa.getIdade() < MAIORIDADE:
             return "menor de idade"
         if "@" not in pessoa.getEmail():
             return "e-mail invalido"
         return "completo"
+    

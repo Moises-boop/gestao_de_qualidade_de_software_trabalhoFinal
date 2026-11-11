@@ -1,9 +1,14 @@
+"""Repositório de pessoas armazenadas em memória (lista)."""
+
 from typing import List, Optional
 
 from pessoa import Pessoa
-from repositorio_pessoas import RepositorioPessoas
+from repositorios.repositorio_pessoas import RepositorioPessoas
+
 
 class RepositorioPessoasMemoria(RepositorioPessoas):
+    """Guarda as pessoas em uma lista, perdida ao encerrar o programa."""
+
     def __init__(self) -> None:
         self.__pessoas: List[Pessoa] = []
 
@@ -22,6 +27,6 @@ class RepositorioPessoasMemoria(RepositorioPessoas):
     def alterar(self, nome: str, nova_pessoa: Pessoa) -> bool:
         for indice, pessoa in enumerate(self.__pessoas):
             if pessoa.getNome() == nome:
-                 self.__pessoas[indice] = nova_pessoa
-                 return True
+                self.__pessoas[indice] = nova_pessoa
+                return True
             return False

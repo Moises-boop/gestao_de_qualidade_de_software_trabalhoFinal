@@ -9,8 +9,8 @@ Qualidade de Software, curso de Ciência da Computação - UTFPR campus Medianei
 from typing import List, Optional
 
 from pessoa import Pessoa
-from repositorio_pessoas import RepositorioPessoas
-from repositorio_pessoas_memoria import RepositorioPessoasMemoria
+from repositorios.repositorio_pessoas import RepositorioPessoas
+from repositorios.repositorio_pessoas_memoria import RepositorioPessoasMemoria
 
 IDADE_ADOLESCENTE = 12
 MAIORIDADE = 18

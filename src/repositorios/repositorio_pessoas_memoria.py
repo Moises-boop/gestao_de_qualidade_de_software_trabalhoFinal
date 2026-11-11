@@ -29,4 +29,4 @@ class RepositorioPessoasMemoria(RepositorioPessoas):
             if pessoa.getNome() == nome:
                 self.__pessoas[indice] = nova_pessoa
                 return True
-            return False
+        return False

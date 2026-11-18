@@ -26,14 +26,17 @@ class CadastroPessoa:
         self.__repositorio = repositorio
 
     def cadastrar(self, nome, idade, email):
+        """Cria uma pessoa com os dados informados, grava no repositório e a retorna."""
         pessoa = Pessoa(nome, idade, email)
         self.__repositorio.cadastrar(pessoa)
         return pessoa
 
     def buscarPorNome(self, nome):
+        """Retorna a pessoa com o nome informado, ou None se não existir."""
         return self.__repositorio.buscar(nome)
 
     def listar(self) -> List[Pessoa]:
+        """Retorna todas as pessoas cadastradas."""
         return self.__repositorio.listar()
 
     def alterar(self, nome, novo_nome, nova_idade, novo_email):
@@ -90,4 +93,3 @@ class CadastroPessoa:
         if "@" not in pessoa.getEmail():
             return "e-mail invalido"
         return "completo"
-    

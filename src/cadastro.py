@@ -9,8 +9,8 @@ Qualidade de Software, curso de Ciência da Computação - UTFPR campus Medianei
 from typing import List, Optional
 
 from pessoa import Pessoa
-from repositorio_pessoas import RepositorioPessoas
-from repositorio_pessoas_memoria import RepositorioPessoasMemoria
+from repositorios.repositorio_pessoas import RepositorioPessoas
+from repositorios.repositorio_pessoas_memoria import RepositorioPessoasMemoria
 
 IDADE_ADOLESCENTE = 12
 MAIORIDADE = 18
@@ -37,6 +37,10 @@ class CadastroPessoa:
         return self.__repositorio.listar()
 
     def alterar(self, nome, novo_nome, nova_idade, novo_email):
+        """Substitui os dados da pessoa com o nome informado.
+
+        Retorna a pessoa alterada, ou None se ela não estiver cadastrada.
+        """
         pessoa = self.buscarPorNome(nome)
 
         if pessoa is None:
@@ -45,6 +49,7 @@ class CadastroPessoa:
         pessoa.setNome(novo_nome)
         pessoa.setIdade(nova_idade)
         pessoa.setEmail(novo_email)
+        self.__repositorio.alterar(nome, pessoa)
 
         return pessoa
 

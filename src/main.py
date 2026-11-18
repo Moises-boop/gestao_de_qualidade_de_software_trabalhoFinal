@@ -1,8 +1,24 @@
 """Gerencia a interação com o usuário"""
 
+import os
+
 from cadastro import CadastroPessoa
+from repositorios.repositorio_pessoas_memoria import RepositorioPessoasMemoria
 
 OPCAO_SAIR = 6
+REPOSITORIO_MYSQL = "mysql"
+
+def CriarRepositorio():
+    """Cria o repositório indicado pela variável de ambiente CADASTRO_REPOSITORIO.
+
+    Usa o MySQL quando o valor for "mysql" e a memória nos demais casos.
+    """
+    if os.environ.get("CADASTRO_REPOSITORIO", "").lower() == REPOSITORIO_MYSQL:
+        # Importado apenas aqui para não exigir o PyMySQL ao usar a memória
+        # pylint: disable-next=import-outside-toplevel
+        from repositorios.repositorio_pessoas_mysql import RepositorioPessoasMysql
+        return RepositorioPessoasMysql()
+    return RepositorioPessoasMemoria()
 
 def LerInteiro(mensagem):
     """Solicita um número inteiro ao usuário, repetindo até receber um valor válido."""
@@ -91,7 +107,7 @@ def AnalisarPessoa(cadastro):
 def Main():
     """Executa o laço principal do programa até o usuário escolher sair."""
 
-    cadastro = CadastroPessoa()
+    cadastro = CadastroPessoa(CriarRepositorio())
     acoes = {
         1: CadastrarPessoa,
         2: ConsultarPessoa,

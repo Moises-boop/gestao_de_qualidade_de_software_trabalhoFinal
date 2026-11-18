@@ -3,6 +3,8 @@
 import pytest
 
 from cadastro import CadastroPessoa
+from pessoa import Pessoa
+from repositorios.repositorio_pessoas_memoria import RepositorioPessoasMemoria
 
 
 @pytest.fixture(name="cadastro")
@@ -129,3 +131,26 @@ class TestAnalisesCadastro:
         pessoa = cadastro.cadastrar("Teste", idade, email)
 
         assert cadastro.analisarContato(pessoa) == esperado
+
+
+class TestRepositorioPessoasMemoria:
+    """Testes do repositório em memória."""
+
+    def testAlterarPessoaQueNaoEhAPrimeira(self):
+        """Alterar deve encontrar a pessoa em qualquer posição da lista."""
+        repositorio = RepositorioPessoasMemoria()
+        repositorio.cadastrar(Pessoa("Ana", 25, "ana@gmail.com"))
+        repositorio.cadastrar(Pessoa("Bruno", 16, "bruno@outlook.com"))
+
+        alterou = repositorio.alterar("Bruno", Pessoa("Bruno Lima", 17, "bruno@gmail.com"))
+
+        assert alterou
+        assert repositorio.buscar("Bruno") is None
+        assert repositorio.buscar("Bruno Lima").getIdade() == 17
+
+    def testAlterarPessoaInexistente(self):
+        """Alterar uma pessoa não cadastrada deve retornar False."""
+        repositorio = RepositorioPessoasMemoria()
+        repositorio.cadastrar(Pessoa("Ana", 25, "ana@gmail.com"))
+
+        assert not repositorio.alterar("Zeca", Pessoa("Zeca", 40, "zeca@gmail.com"))

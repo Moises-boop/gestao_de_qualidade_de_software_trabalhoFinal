@@ -44,6 +44,8 @@ Execute os comandos a partir da raiz do projeto.
    source .venv/bin/activate
    ```
 
+   No Windows, ative com `.venv\Scripts\activate`.
+
 2. Instale as ferramentas de qualidade:
 
    ```bash

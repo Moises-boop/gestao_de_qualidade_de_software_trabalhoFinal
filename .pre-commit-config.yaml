@@ -4,12 +4,12 @@ repos:
     hooks:
     - id: pylint
       name: pylint
-      entry: .venv/Scripts/python.exe -m pylint
+      entry: python -m pylint
       language: system
       types: [python]
     - id: pytest
       name: pytest
-      entry: .venv/Scripts/python.exe -m pytest
+      entry: python -m pytest
       language: system
       pass_filenames: false
       always_run: true
